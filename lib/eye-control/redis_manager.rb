@@ -1,6 +1,6 @@
 class Eye::RedisManager
   include Celluloid::IO
-  include Celluloid::Logger
+  include Celluloid::Internals::Logger
   include Celluloid::Notifications
 
   attr_accessor :config
@@ -58,7 +58,7 @@ class Eye::RedisManager
 
   def broadcast_state topic, process
     process_state = process.state_hash.merge(:readonly => @config[:readonly])
-    
+
     @redis.hset "eye:processes", process.state_key, process_state.to_json
     @redis.publish "eye:process:state", process_state.to_json
   end
