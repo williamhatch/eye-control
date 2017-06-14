@@ -1,6 +1,5 @@
 class Eye::RedisManager
   include Celluloid::IO
-  include Celluloid::Internals::Logger
   include Celluloid::Notifications
 
   attr_accessor :config

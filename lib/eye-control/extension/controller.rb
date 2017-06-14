@@ -1,5 +1,5 @@
 class Eye::Controller
-  def set_opt_eye_control params = {}
+  def set_opt_eye_control(params = {})
     params[:enable]   ||= true
     params[:host]     ||= "127.0.0.1"
     params[:port]     ||= 6379
@@ -8,13 +8,13 @@ class Eye::Controller
     params[:port] = params[:port].to_i
 
     if params[:enable]
-      start_eye_control params
+      start_eye_control(params)
     else
       stop_eye_control
     end
   end
 
-  def start_eye_control config
+  def start_eye_control(config)
     if @eye_control && @eye_control.actors.first.config != config
       stop_eye_control
     end
