@@ -9,17 +9,7 @@ Each Eye server will report its state to a centralized [Redis](http://redis.io) 
 
 ```ruby
 Eye.config do
-  logger '/tmp/eye.log'
-  eye_control :enable => true, :host => '192.168.1.5'
-end
-```
-
-By default, the Eye process will also respond to start / stop / restart requests coming from Eye Control. This can be disabled by running in read-only mode:
-
-```ruby
-Eye.config do
-  logger '/tmp/eye.log'
-  eye_control :enable => true, :host => '192.168.1.5', :readonly => true
+  enable_control :host => "192.168.1.5", :db => "1", :port => "6379"
 end
 ```
 
