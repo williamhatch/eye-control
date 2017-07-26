@@ -1,9 +1,5 @@
 class Eye::Controller
   def set_opt_control(args)
-    @tlogger = Logger.new('/home/schaerli/Rails/yml_converter/foo.txt')
-    @tlogger.info 'im here in the set_opt_eye_control'
-    @tlogger.info "#{args.inspect}"
-
     params = args[0]
 
     params[:host]     ||= "127.0.0.1"
@@ -12,8 +8,6 @@ class Eye::Controller
 
     params[:port] = params[:port].to_i
     params[:db]   = params[:db].to_i
-
-    @tlogger.info "#{params.inspect}"
 
     start_control(params)
   end
@@ -24,13 +18,7 @@ class Eye::Controller
     end
 
     if @eye_control.nil?
-      @tlogger.info "in the start_eye_control"
-      # @eye_control = ::Eye::RedisManager.supervise(config)
       @eye_control = ::Eye::RedisManager.supervise as: :actor, type: Actor, args: [config]
-      # Celluloid::Actor[:eye_redis_manager] = ::Eye::RedisManager.supervise(config)
-
-      # @eye_control = ::Eye::RedisManager.supervise as: :my_actor, args: [config]
-
     end
   end
 
