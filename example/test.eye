@@ -1,7 +1,7 @@
 require 'eye-control'
 
 Eye.config do
-  eye_control :enable => true, :host => "127.0.0.1", :db => "0", :port => "6379"
+  enable_control :host => "192.168.1.5", :db => "1", :port => "6379"
 end
 
 Eye.application :app do
