@@ -13,7 +13,7 @@ class Eye::Controller
   end
 
   def start_control(config)
-    if @eye_control && @eye_control.actors.first.config != config
+    if @eye_control
       stop_eye_control
     end
 
