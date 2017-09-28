@@ -13,13 +13,7 @@ class Eye::Controller
   end
 
   def start_control(config)
-    if @eye_control
-      stop_eye_control
-    end
-
-    if @eye_control.nil?
-      @eye_control = ::Eye::RedisManager.supervise as: :actor, type: Actor, args: [config]
-    end
+    @eye_control = ::Eye::RedisManager.supervise as: :actor, type: Actor, args: [config]
   end
 
   def stop_eye_control
