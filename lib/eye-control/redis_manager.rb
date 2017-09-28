@@ -5,19 +5,17 @@ class Eye::RedisManager
 
   def initialize(config)
     @config = config
-    
+
     async.init_redis
-    
-    every(5.seconds) do 
+
+    every(5.seconds) do
       async.broadcast_states
     end
   end
 
   def init_redis
-    @tlogger = Logger.new('/home/schaerli/Rails/yml_converter/foo.txt')
-
     @redis = ::Redis.new(:host => @config[:host], :port => @config[:port], :db => @config[:db], :driver => :celluloid)
-    @redis_sub = ::Redis.new(:host => @config[:host], :port => @config[:port], :db => @config[:db], :driver => :celluloid, :timeout => 0)  
+    @redis_sub = ::Redis.new(:host => @config[:host], :port => @config[:port], :db => @config[:db], :driver => :celluloid, :timeout => 0)
 
     Thread.new do
       @redis_sub.psubscribe("eye:command:*") do |on|
@@ -32,10 +30,10 @@ class Eye::RedisManager
           next unless evt["host"] == Eye::Local.host
           next unless process = Eye::Control.process_by_full_name(evt["full_name"])
 
-          if evt["event"] == "process:start" 
+          if evt["event"] == "process:start"
             info "Starting #{process.full_name}"
             process.start_process
-          elsif evt["event"] == "process:stop" 
+          elsif evt["event"] == "process:stop"
             info "Stopping #{process.full_name}"
             process.stop_process
           elsif evt["event"] == "process:restart"
