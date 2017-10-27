@@ -1,3 +1,4 @@
+require_relative '../logger'
 class Eye::Process
   include Celluloid::Notifications
 

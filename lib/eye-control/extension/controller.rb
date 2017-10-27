@@ -1,4 +1,4 @@
-require 'pry'
+require_relative '../logger'
 class Eye::Controller
   def set_opt_control(args)
     params = args[0]
