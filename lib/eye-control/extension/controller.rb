@@ -1,7 +1,7 @@
 require_relative '../logger'
 class Eye::Controller
   def set_opt_control(args)
-    params = args[0]
+    params = args[0] || args || {}
 
     params[:host]     ||= "127.0.0.1"
     params[:port]     ||= 6379
