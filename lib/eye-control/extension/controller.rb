@@ -1,3 +1,4 @@
+require 'pry'
 class Eye::Controller
   def set_opt_control(args)
     params = args[0]
@@ -9,6 +10,7 @@ class Eye::Controller
     params[:port] = params[:port].to_i
     params[:db]   = params[:db].to_i
 
+    XLogger.info 'soc shit'
     start_control(params)
   end
 

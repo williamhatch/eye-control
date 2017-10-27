@@ -1,9 +1,12 @@
+require_relative '../logger'
+
 class Eye::RedisManager
   include Celluloid
 
   attr_accessor :config
 
   def initialize(config)
+    XLogger.info 'rm shit'
     @config = config
 
     async.init_redis
